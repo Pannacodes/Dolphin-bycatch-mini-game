@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dolphin Dash</title>
+<link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+ 
+  <!-- ============ START SCREEN ============ -->
+  <div id="start-screen" class="container">
+    <h1>🐬 Dolphin Dash</h1>
+    <p class="subtitle">Catch fish. Dodge fishnets. Don't become bycatch.</p>
+    <button id="start-btn">Start Game</button>
+  </div>
+ 
+  <!-- ============ GAME SCREEN ============ -->
+  <div id="game-screen" class="container">
+ 
+    <!-- Scoreboard sits above the game box and updates live during play -->
+    <div id="scoreboard">
+      Fish caught: <span id="score-value">0</span>
+    </div>
+ 
+    <!-- This is the "stage" where the dolphin, fish and nets all live -->
+    <!-- Every entity (Dolphin, Fish, Fishnet) appends its DOM node in here -->
+    <div id="game-box"></div>
+ 
+  </div>
+ 
+  <!-- ============ GAME OVER SCREEN ============ -->
+  <div id="game-over-screen" class="container">
+    <h2>💥 Caught in the net!</h2>
+    <p>Final score: <span id="final-score-value">0</span> fish</p>
+    <button id="restart-btn">Play Again</button>
+  </div>
+ 
+  <!--
+    Script load order matters here:
+    1. main.js first - it declares the global variables/functions the others use
+    2. entity classes after - they rely on things declared in main.js (like gameBoxNode)
+  -->
+  <script src="./js/main.js"></script>
+  <script src="./js/player.js"></script>
+  <script src="./js/fish.js"></script>
+  <script src="./js/net.js"></script>
+ 
+</body>
+</html>
