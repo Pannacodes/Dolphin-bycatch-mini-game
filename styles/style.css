@@ -15,7 +15,9 @@ body {
 }
 
 #game-box {
-  background-color: #1c8c8c; /* placeholder color*/
+  background-image: url("../images/bg.png");
+  background-size: auto 100%;
+  background-color: #061826;   /* Fallback color */
   width: min(90vw, 800px);
   aspect-ratio: 8 / 5; /* The game box is responsive while keeping the original 8:5 aspect ratio. This prevents the game area from stretching on different screen sizes, which keeps object positions and collision calculations consistent.*/
   position: relative;
