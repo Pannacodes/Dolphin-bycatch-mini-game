@@ -41,3 +41,59 @@ const gameBoxNode = document.querySelector("#game-box");
 
 const scoreValueNode = document.querySelector("#score-value");
 const finalScoreValueNode = document.querySelector("#final-score-value");
+
+//* ============================================================
+//* GLOBAL GAME VARIABLES
+//* They describe the current "state" of the game at any moment.
+//* They start as null/empty because the game hasn't started yet.
+//* ============================================================
+
+let gameIntervalId = null       // the main game loop interval
+
+let playerObj = null // add near the top with your other globals
+
+
+//* ============================================================
+//* GAME SETUP / TEARDOWN
+//* ============================================================
+ 
+function startGame() {
+  startScreenNode.style.display = "none"
+  gameScreenNode.style.display = "flex"
+  gameOverScreenNode.style.dsplay = "none" // <- when restarting
+
+  playerObj = new dolphin()
+
+
+  gameIntervalId = setInterval(gameLoop, Math.floor(1000 / 60)) // main loop (runs ~60 times per second)
+}
+
+
+
+//* ============================================================
+//* MAIN GAME LOOP
+//* This function runs ~60 times per second while the game is active.
+//* ============================================================
+function gameLoop() {
+
+}
+
+
+//* ============================================================
+//* EVENT LISTENERS
+//* ============================================================
+startBtnNode.addEventListener("click", startGame)
+
+window.addEventListener("keydown", (event) => {
+  if (!playerObj) {
+    return // ignore key presses when there's no active dolphin (e.g. on the start screen)
+  }
+ 
+  event.preventDefault() // stops the arrow keys from scrolling the page
+ 
+  if (event.key === "ArrowUp") {
+    playerObj.moveUp()
+  } else if (event.key === "ArrowDown") {
+    playerObj.moveDown()
+  }
+})
