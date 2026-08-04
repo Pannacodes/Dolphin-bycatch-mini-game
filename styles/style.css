@@ -1,41 +1,196 @@
-body {
-  margin: 0;
-  background-color: #061826;
-  color: #eafaf6;
-  font-family: sans-serif;
-  text-align: center;
+/* =========================================================
+   THEME VARIABLES - whole palette
+   ========================================================= */
+:root {
+  --lavender: #a99cd6;
+  --lavender-light: #cfc4ec;
+  --button-purple: #8176b6;
+  --button-purple-hover: #7568ab;
+  --white: #ffffff;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Press Start 2P", monospace; /* pixel font from index.html */
+  color: var(--button-purple);
+  text-align: center;
+  background-image: url("../images/bgOverall.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+h1,
+h2 {
+  color: var(--lavender);
+  letter-spacing: 2px;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+.subtitle {
+  color: var(--white);
+  font-size: clamp(11px, 1.6vw, 16px);
+  line-height: 1.8;
+}
+
+/* =========================================================
+   BUTTONS (both <button> and the .btn-link <a> share this look)
+   ========================================================= */
+button,
+.btn-link {
+  display: inline-block;
+  background-color: var(--button-purple);
+  color: var(--white);
+  font-family: inherit;
+  font-size: clamp(12px, 1.8vw, 16px);
+  text-decoration: none;
+  padding: 18px 28px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.15s ease-in-out;
+}
+
+button:hover,
+.btn-link:hover {
+  background-color: var(--button-purple-hover);
+}
+
+/* =========================================================
+   SCREEN CONTAINERS
+   Each one fills the full viewport so decorative sprites can be
+   positioned anywhere on screen, not just around the centered content.
+   ========================================================= */
 .container {
+  position: relative; /* anchor point for .deco absolutely-positioned children */
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 50px;
+  overflow: hidden; /* keeps decorative sprites from causing scrollbars */
+  padding: 20px;
+}
+
+#game-screen,
+#game-over-screen {
+  display: none; /* toggled by JS */
+}
+
+/* =========================================================
+   DECORATIVE SPRITES (non-interactive, purely visual)
+   Positions below are estimates based on the mockups - nudge the
+   top/left/right/bottom values in devtools until they match exactly.
+   ========================================================= */
+.deco {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---- Start screen ---- */
+.deco-start-dolphin {
+  width: 140px;
+  left: 6%;
+  top: 58%;
+}
+
+.deco-start-fish-1 {
+  width: 50px;
+  right: 20%;
+  top: 45%;
+}
+
+.deco-start-fish-2 {
+  width: 45px;
+  right: 6%;
+  bottom: 18%;
+}
+
+.deco-start-fish-3 {
+  width: 45px;
+  left: 10%;
+  bottom: 12%;
+  transform: scaleX(-1); /* flips the fish to face the other way for variety */
+}
+
+/* ---- Game over screen ---- */
+
+
+/* Crabs flanking the GAME OVER title */
+.game-over-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.crab {
+  width: 80px;
+}
+
+.video-container {
+  width: min(90vw, 560px);
+  aspect-ratio: 16 / 9;
+  margin: 25px 0;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--lavendar);
+  border-radius: 16px;
+}
+
+/* =========================================================
+   GAME BOX - the actual play area
+   ========================================================= */
+#scoreboard {
+  font-size: clamp(12px, 1.8vw, 18px);
+  margin-bottom: 16px;
+}
+
+#score-value,
+#final-score-value {
+  color: var(--white);
 }
 
 #game-box {
+  /* Gameplay-area background - can be the same image as the page background
+     or a separate, more saturated crop; it tiles + scrolls independently
+     via JS (see scrollBackground() in main.js), so keep it separate from
+     the static page background above. */
   background-image: url("../images/bg.png");
   background-repeat: repeat-x;
   background-size: auto 100%;
-  background-color: #061826; /* Fallback color */
-  width: min(90vw, 800px);
-  aspect-ratio: 8 / 5; /* The game box is responsive while keeping the original 8:5 aspect ratio. This prevents the game area from stretching on different screen sizes, which keeps object positions and collision calculations consistent.*/
+  background-color: #061826; /* fallback while the image loads */
+
+  width: min(90vw, 900px);
+  aspect-ratio: 2 / 1; /* was 8/5 - this is "slightly longer"; tweak freely */
+
   position: relative;
   overflow: hidden;
-
   border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* Hide both non-start screens by default */
-#game-screen,
-#game-over-screen {
-  display: none;
-}
-
-#game-screen {
-  background-image: url("../images/bg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+#game-box * {
+  pointer-events: none;
 }

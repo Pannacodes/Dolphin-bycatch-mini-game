@@ -74,7 +74,7 @@ function startGame() {
 
   gameIntervalId = setInterval(gameLoop, Math.floor(1000 / 60)); // main loop (runs ~60 times per second)
   fishSpawnIntervalId = setInterval(addNewFish, 1200);
-  pollutionpawnIntervalId = setInterval(addNewPollution, 2200);
+  pollutionSpawnIntervalId = setInterval(addNewPollution, 2200);
 }
 
 function gameOver() {
@@ -215,7 +215,6 @@ function scrollBackground() {
   // loop. We never need to check "did it reach the end?" or reset
   // it back to 0; the tiling handles that for us automatically.
   gameBoxNode.style.backgroundPositionX = `${bgOffsetX}px`;
-  console.log ("scrolling")
 }
 
 //* ============================================================

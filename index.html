@@ -1,51 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dolphin Dash</title>
-<link rel="stylesheet" href="./styles/style.css">
-</head>
-<body>
- 
-  <!-- ============ START SCREEN ============ -->
-  <div id="start-screen" class="container">
-    <h1>🐬 Dolphin Dash</h1>
-    <p class="subtitle">Catch fish. Dodge pollution. Don't become bycatch.</p>
-    <button id="start-btn">Start Game</button>
-  </div>
- 
-  <!-- ============ GAME SCREEN ============ -->
-  <div id="game-screen" class="container">
- 
-    <!-- Scoreboard sits above the game box and updates live during play -->
-    <div id="scoreboard">
-      Fish caught: <span id="score-value">0</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- suggested by Claude -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dolphin Dash</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <!-- ============ START SCREEN ============ -->
+    <div id="start-screen" class="container">
+      <img
+        src="../images/dolphin.gif"
+        class="deco deco-start-dolphin"
+        alt="swimming dolphin"
+      />
+      <img
+        src="../images/fish1.gif"
+        class="deco deco-start-fish-1"
+        alt="simple grey fish swimming"
+      />
+      <img
+        src="../images/fish2.gif"
+        class="deco deco-start-fish-2"
+        alt="colorful fish swimming"
+      />
+      <h1>DOLPHIN DASH</h1>
+      <p class="subtitle">
+        Collect fish. Avoid pollution.<br />Save the ocean.
+      </p>
+      <button id="start-btn">START GAME</button>
     </div>
- 
-    <!-- This is the "stage" where the dolphin, fish and pollutions all live -->
-    <!-- Every entity (Dolphin, Fish, Pollution) appends its DOM node in here -->
-    <div id="game-box"></div>
- 
-  </div>
- 
-  <!-- ============ GAME OVER SCREEN ============ -->
-  <div id="game-over-screen" class="container">
-    <h2>💥 Caught in the net!</h2>
-    <p>Final score: <span id="final-score-value">0</span> fish</p>
-    <button id="restart-btn">Play Again</button>
-  </div>
- 
-  <!--
+
+    <!-- ============ GAME SCREEN ============ -->
+    <div id="game-screen" class="container">
+      <!-- Scoreboard sits above the game box and updates live during play -->
+      <div id="scoreboard">Fish caught: <span id="score-value">0</span></div>
+
+      <!-- This is the "stage" where the dolphin, fish and pollutions all live -->
+      <!-- Every entity (Dolphin, Fish, Pollution) appends its DOM node in here -->
+      <div id="game-box"></div>
+    </div>
+
+    <!-- ============ GAME OVER SCREEN ============ -->
+    <div id="game-over-screen" class="container">
+      <div class="game-over-title">
+        <img
+          src="../images/crab.gif"
+          class="crab crab-left"
+          alt="little red crab"
+        />
+        <h2>GAME OVER</h2>
+        <img
+          src="../images/crab.gif"
+          class="crab crab-right"
+          alt="little red crab"
+        />
+      </div>
+
+      <p>Final score: <span id="final-score-value">0</span> fish</p>
+
+      <!-- Update this href to whatever real page you want to link to -->
+      <p>Learn how marine pollution affects our oceans:</p>
+
+      <div class="video-container">
+        <iframe
+          src="https://www.youtube.com/embed/HQTUWK7CM-Y"
+          title="Marine Pollution"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+
+      <button id="restart-btn">RESTART</button>
+    </div>
+
+    <!--
     Script load order matters because:
     1. main.js first - it declares the global variables/functions the others use
     2. entity classes after - they rely on things declared in main.js (like gameBoxNode)
   -->
-  <script src="./js/main.js"></script>
-  <script src="./js/player.js"></script>
-  <script src="./js/fish.js"></script>
-  <script src="./js/pollution.js"></script>
- 
-</body>
+    <script src="./js/main.js"></script>
+    <script src="./js/player.js"></script>
+    <script src="./js/fish.js"></script>
+    <script src="./js/pollution.js"></script>
+  </body>
 </html>
