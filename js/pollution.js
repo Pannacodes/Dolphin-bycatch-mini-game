@@ -1,16 +1,16 @@
-class Fishnet {
+class Pollution {
 
   constructor(randomPosY) {
     this.node = document.createElement("img")
-    this.node.src = "../images/fishnet.png"
-    this.node.alt = "Fishnet"
+    this.node.src = "../images/bottle.png"
+    this.node.alt = "Pollution"
 
     gameBoxNode.append(this.node)
 
     this.x = gameBoxNode.offsetWidth
     this.y = randomPosY
-    this.height = 60
-    this.width = 50
+    this.height = 40
+    this.width = 30
     this.speed = 3
 
     this.node.style.position = "absolute"

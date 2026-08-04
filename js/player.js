@@ -1,4 +1,4 @@
-class dolphin {
+class Dolphin {
   constructor() {
     this.node = document.createElement("img");
     this.node.src = "../images/dolphin.gif";
