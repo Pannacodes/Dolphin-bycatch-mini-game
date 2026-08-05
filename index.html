@@ -39,6 +39,10 @@
         Collect fish. Avoid pollution.<br />Save the ocean.
       </p>
       <button id="start-btn">START GAME</button>
+      <p class="bonus-text">
+        You start for the game, <br />
+        you'll stay for music.
+      </p>
     </div>
 
     <!-- ============ GAME SCREEN ============ -->
@@ -50,6 +54,7 @@
 
         <div id="lives"></div>
       </div>
+      <div id="manta-layer"></div>
 
       <!-- This is the "stage" where the dolphin, fish and pollutions all live -->
       <!-- Every entity (Dolphin, Fish, Pollution) appends its DOM node in here -->
@@ -66,11 +71,14 @@
 
       <p>Final score: <span id="final-score-value">0</span> fish</p>
 
-      <!-- Update this href to whatever real page you want to link to -->
-      <p>Learn how marine pollution affects our oceans:</p>
+      <p class="bonus-text-end">
+        Learn how plastic pollution affects our oceans, <br />
+        and how you can help:
+      </p>
 
       <div class="video-container">
         <iframe
+          id="pollution-video"
           src="https://www.youtube.com/embed/HQTUWK7CM-Y"
           title="Marine Pollution"
           allowfullscreen
@@ -80,15 +88,26 @@
 
       <button id="restart-btn">RESTART</button>
     </div>
+    
+<!--=======
+    AUDIO
+  =========-->
 
+    <audio id="splash-sound" src="./sounds/splash.mp3"></audio>
+
+    <audio id="dolphin-sound" src="./sounds/dolphin.mp3"></audio>
+
+    <audio id="game-music" src="./sounds/DireDireDocks.mp3" loop></audio>
     <!--
     Script load order matters because:
     1. main.js first - it declares the global variables/functions the others use
     2. entity classes after - they rely on things declared in main.js (like gameBoxNode)
   -->
+
     <script src="./js/main.js"></script>
     <script src="./js/player.js"></script>
     <script src="./js/fish.js"></script>
     <script src="./js/pollution.js"></script>
+    <script src="./js/manta.js"></script>
   </body>
 </html>

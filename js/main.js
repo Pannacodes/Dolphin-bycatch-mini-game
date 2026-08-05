@@ -17,6 +17,7 @@
 const startScreenNode = document.querySelector("#start-screen");
 const gameScreenNode = document.querySelector("#game-screen");
 const gameOverScreenNode = document.querySelector("#game-over-screen");
+const videoNode = document.querySelector("#pollution-video");
 
 //* ---------- BUTTONS ----------
 // These buttons allow the player to control the game.
@@ -43,6 +44,15 @@ const livesNode = document.querySelector("#lives");
 const scoreValueNode = document.querySelector("#score-value");
 const finalScoreValueNode = document.querySelector("#final-score-value");
 
+//* ---------- MUSIC ----------
+const splashSoundNode = document.querySelector("#splash-sound");
+const dolphinSoundNode = document.querySelector("#dolphin-sound");
+const gameMusicNode = document.querySelector("#game-music");
+
+gameMusicNode.volume = 0.6;
+splashSoundNode.volume = 0.2;
+dolphinSoundNode.volume = 0.4;
+
 //* ============================================================
 //* GLOBAL GAME VARIABLES
 //* They describe the current "state" of the game at any moment.
@@ -57,6 +67,7 @@ let playerObj = null; // the Dolphin instance - null until game starts
 
 let fishArr = []; // all Fish currently on screen
 let pollutionArr = []; // all pollution currently on screen
+let mantaArr = [];
 let score = 0; // how many fish the player has caught
 let lives = 2; // current dolphin lives
 const maxLives = 2; // starting lives
@@ -76,14 +87,29 @@ function startGame() {
   gameScreenNode.style.display = "flex";
   gameOverScreenNode.style.display = "none"; // <- when restarting
 
+  splashSoundNode.currentTime = 0;
+  splashSoundNode.play();
+
+  dolphinSoundNode.currentTime = 0;
+  dolphinSoundNode.play();
+
+  gameMusicNode.currentTime = 0;
+  gameMusicNode.play();
+
   playerObj = new Dolphin();
 
   gameIntervalId = setInterval(gameLoop, Math.floor(1000 / 60)); // main loop (runs ~60 times per second)
   fishSpawnIntervalId = setInterval(addNewFish, 1200);
   pollutionSpawnIntervalId = setInterval(addNewPollution, 2200);
+  mantaSpawnIntervalId = setInterval(addNewManta, 10000);
 }
 
 function gameOver() {
+  splashSoundNode.currentTime = 0;
+  splashSoundNode.play();
+
+  gameMusicNode.pause();
+  gameMusicNode.currentTime = 0;
   // 1. switches screens
   gameScreenNode.style.display = "none";
   gameOverScreenNode.style.display = "flex";
@@ -96,6 +122,7 @@ function gameOver() {
   clearInterval(gameIntervalId);
   clearInterval(fishSpawnIntervalId);
   clearInterval(pollutionSpawnIntervalId);
+  clearInterval(mantaSpawnIntervalId);
 }
 
 function restartGame() {
@@ -103,6 +130,7 @@ function restartGame() {
   if (playerObj) {
     playerObj.node.remove();
   }
+  videoNode.src = videoNode.src;
   // 1. clears every entity from the DOM
   //    (if we don't do this, old fish/pollution images stay stuck on screen)
   fishArr.forEach((fishObj) => fishObj.node.remove());
@@ -143,6 +171,11 @@ function addNewPollution() {
 
   let pollutionObj = new Pollution(randomPosY);
   pollutionArr.push(pollutionObj);
+}
+
+function addNewManta() {
+  let mantaObj = new Manta();
+  mantaArr.push(mantaObj);
 }
 
 //* ============================================================
@@ -265,6 +298,7 @@ function gameLoop() {
   scrollBackground();
   fishArr.forEach((fishObj) => fishObj.automaticMovementLeft());
   pollutionArr.forEach((pollutionObj) => pollutionObj.automaticMovementLeft());
+  mantaArr.forEach((mantaObj) => mantaObj.automaticMovement());
   checkCollisionPlayerFish();
   checkCollisionPlayerPollution();
   checkFishDespawn();
