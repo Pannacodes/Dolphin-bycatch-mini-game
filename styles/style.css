@@ -24,7 +24,7 @@ body {
   font-family: "Press Start 2P", monospace; /* pixel font from index.html */
   color: var(--button-purple);
   text-align: center;
-  background-image: url("../images/bgOverall.png");
+  background-image: url("./images/bgOverall.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -138,7 +138,7 @@ button:hover {
   /* Gameplay-area background - it tiles + scrolls independently
      via JS (see scrollBackground() in main.js), so kept it separate from
      the static page background above. */
-  background-image: url("./images/bg.png");
+  background-image: url("../images/bg.png");
   background-repeat: repeat-x;
   background-size: auto 100%;
   background-color: #061826; /* fallback while the image loads */
