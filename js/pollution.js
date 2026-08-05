@@ -2,7 +2,7 @@ class Pollution {
 
   constructor(randomPosY) {
     this.node = document.createElement("img")
-    this.node.src = "../images/bottle.png"
+    this.node.src = "./images/bottle.png"
     this.node.alt = "Pollution"
 
     gameBoxNode.append(this.node)

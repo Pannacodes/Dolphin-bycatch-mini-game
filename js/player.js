@@ -1,7 +1,7 @@
 class Dolphin {
   constructor() {
     this.node = document.createElement("img");
-    this.node.src = "../images/dolphin.gif";
+    this.node.src = "./images/dolphin.gif";
     this.node.alt = "Dolphin";
 
     gameBoxNode.append(this.node);

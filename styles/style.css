@@ -24,7 +24,7 @@ body {
   font-family: "Press Start 2P", monospace; /* pixel font from index.html */
   color: var(--button-purple);
   text-align: center;
-  background-image: url("../images/bgOverall.png");
+  background-image: url("./images/bgOverall.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -48,10 +48,9 @@ h1 {
 }
 
 /* =========================================================
-   BUTTONS (both <button> and the .btn-link <a> share this look)
+   BUTTONS 
    ========================================================= */
-button,
-.btn-link {
+button {
   display: inline-block;
   background-color: var(--button-purple);
   color: var(--white);
@@ -67,8 +66,7 @@ button,
   transition: background-color 0.15s ease-in-out;
 }
 
-button:hover,
-.btn-link:hover {
+button:hover {
   background-color: var(--button-purple-hover);
 }
 
@@ -96,8 +94,6 @@ button:hover,
 
 /* =========================================================
    DECORATIVE SPRITES (non-interactive, purely visual)
-   Positions below are estimates based on the mockups - nudge the
-   top/left/right/bottom values in devtools until they match exactly.
    ========================================================= */
 .deco {
   position: absolute;
@@ -124,40 +120,6 @@ button:hover,
   bottom: 18%;
 }
 
-.deco-start-fish-3 {
-  width: 45px;
-  left: 10%;
-  bottom: 12%;
-  transform: scaleX(-1); /* flips the fish to face the other way for variety */
-}
-
-/* ---- Game over screen ---- */
-
-
-/* Crabs flanking the GAME OVER title */
-.game-over-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.crab {
-  width: 80px;
-}
-
-.video-container {
-  width: min(90vw, 560px);
-  aspect-ratio: 16 / 9;
-  margin: 25px 0;
-}
-
-.video-container iframe {
-  width: 100%;
-  height: 100%;
-  border: 4px solid var(--lavendar);
-  border-radius: 16px;
-}
 
 /* =========================================================
    GAME BOX - the actual play area
@@ -173,9 +135,8 @@ button:hover,
 }
 
 #game-box {
-  /* Gameplay-area background - can be the same image as the page background
-     or a separate, more saturated crop; it tiles + scrolls independently
-     via JS (see scrollBackground() in main.js), so keep it separate from
+  /* Gameplay-area background - it tiles + scrolls independently
+     via JS (see scrollBackground() in main.js), so kept it separate from
      the static page background above. */
   background-image: url("../images/bg.png");
   background-repeat: repeat-x;
@@ -183,7 +144,7 @@ button:hover,
   background-color: #061826; /* fallback while the image loads */
 
   width: min(90vw, 900px);
-  aspect-ratio: 2 / 1; /* was 8/5 - this is "slightly longer"; tweak freely */
+  aspect-ratio: 2 / 1; 
 
   position: relative;
   overflow: hidden;
@@ -193,4 +154,34 @@ button:hover,
 
 #game-box * {
   pointer-events: none;
+}
+
+/* =========================================================
+   GAME OVER SCREEN 
+   ========================================================= */
+
+/* Crabs flanking the GAME OVER title */
+.game-over-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.crab {
+  width: 80px;
+}
+
+/* Video container */
+.video-container {
+  width: min(90vw, 560px);
+  aspect-ratio: 16 / 9;
+  margin: 25px 0;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--button-purple);
+  border-radius: 16px;
 }

@@ -2,7 +2,7 @@ class Fish {
 
   constructor(randomPosY) {
     this.node = document.createElement("img")
-    this.node.src = "../images/fish1.gif"
+    this.node.src = "./images/fish1.gif"
     this.node.alt = "Fish"
 
     gameBoxNode.append(this.node)
