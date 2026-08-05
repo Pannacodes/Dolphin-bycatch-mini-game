@@ -8,8 +8,8 @@ class Dolphin {
 
     this.x = 60;
     this.y = 160;
-    this.height = 70;
-    this.width = 110;
+    this.height = 50;
+    this.width = 120;
 
     this.border = this.node.style.position = "absolute";
     this.node.style.left = `${this.x}px`;

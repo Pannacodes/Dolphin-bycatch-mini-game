@@ -1,9 +1,17 @@
 class Fish {
 
-  constructor(randomPosY) {
+  constructor(randomPosY, isFast) {
     this.node = document.createElement("img")
-    this.node.src = "./images/fish1.gif"
     this.node.alt = "Fish"
+    if(isFast){
+      this.node.src = "./images/fish2.gif"
+      this.speed = 5
+      this.points = 2
+    } else {
+      this.node.src = "./images/fish1.gif"
+      this.speed = 2
+      this.points = 1
+    }
 
     gameBoxNode.append(this.node)
 
@@ -11,7 +19,6 @@ class Fish {
     this.y = randomPosY
     this.height = 20
     this.width = 40
-    this.speed = 2
 
     this.node.style.position = "absolute"
     this.node.style.left = `${this.x}px`

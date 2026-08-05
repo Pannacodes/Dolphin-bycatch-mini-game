@@ -32,6 +32,7 @@ const restartBtnNode = document.querySelector("#restart-btn");
 // this container while the game is running.
 
 const gameBoxNode = document.querySelector("#game-box");
+const livesNode = document.querySelector("#lives");
 
 //* ---------- SCORE DISPLAY ----------
 // scoreValueNode updates during gameplay whenever the player
@@ -57,6 +58,8 @@ let playerObj = null; // the Dolphin instance - null until game starts
 let fishArr = []; // all Fish currently on screen
 let pollutionArr = []; // all pollution currently on screen
 let score = 0; // how many fish the player has caught
+let lives = 2; // current dolphin lives
+const maxLives = 2; // starting lives
 
 let bgOffsetX = 0; // how far (in px) the background has scrolled so far
 const bgScrollSpeed = 1; // how many px the background moves left per frame - tweak this to speed up/slow down the current
@@ -66,6 +69,9 @@ const bgScrollSpeed = 1; // how many px the background moves left per frame - tw
 //* ============================================================
 
 function startGame() {
+  lives = maxLives;
+  updateLivesDisplay();
+
   startScreenNode.style.display = "none";
   gameScreenNode.style.display = "flex";
   gameOverScreenNode.style.display = "none"; // <- when restarting
@@ -93,11 +99,12 @@ function gameOver() {
 }
 
 function restartGame() {
-  // 1. clears every entity from the DOM
-  //    (if we don't do this, old fish/pollution images stay stuck on screen)
+  // Removes the existing dolphin from the DOM
   if (playerObj) {
     playerObj.node.remove();
   }
+  // 1. clears every entity from the DOM
+  //    (if we don't do this, old fish/pollution images stay stuck on screen)
   fishArr.forEach((fishObj) => fishObj.node.remove());
   pollutionArr.forEach((pollutionObj) => pollutionObj.node.remove());
 
@@ -124,9 +131,10 @@ function restartGame() {
 //* ============================================================
 
 function addNewFish() {
-  let randomPosY = Math.random() * (gameBoxNode.offsetHeight - 40); // pick a random vertical position within the game box
+  let randomPosY = Math.random() * (gameBoxNode.offsetHeight - 40); // picks a random vertical position within the game box
+  let isFast = score >= 5 && Math.random() < 0.3;
 
-  let fishObj = new Fish(randomPosY);
+  let fishObj = new Fish(randomPosY, isFast);
   fishArr.push(fishObj);
 }
 
@@ -184,22 +192,54 @@ function checkCollisionPlayerFish() {
       // 2. remove it from the tracking array
       fishArr.splice(index, 1);
       // 3. reward the player
-      score += 1;
+      score += fishObj.points;
       updateScoreDisplay();
     }
   });
 }
 
 function checkCollisionPlayerPollution() {
-  pollutionArr.forEach((pollutionObj) => {
+  pollutionArr.forEach((pollutionObj, index) => {
     if (checkCollision(playerObj, pollutionObj)) {
-      gameOver(); // ! one pollution touch = instant game over (bycatch) (FOR NOW - WILL CHANGE TO LIVES SYSTEM)
+      // remove pollution from the DOM
+      pollutionObj.node.remove();
+
+      // removey pollution from the array
+      pollutionArr.splice(index, 1);
+
+      // removes one life
+      loseLife();
     }
   });
 }
 
 function updateScoreDisplay() {
   scoreValueNode.textContent = score;
+}
+
+function updateLivesDisplay() {
+  // remove existing hearts first
+  livesNode.innerHTML = "";
+  // creates one heart image for every remaining life
+  for (let i = 0; i < lives; i++) {
+    const heartImg = document.createElement("img");
+
+    heartImg.src = "./images/heart.png";
+    heartImg.classList.add("heart");
+    heartImg.alt = "little red pixelated heart";
+
+    livesNode.append(heartImg);
+  }
+}
+
+function loseLife() {
+  lives--;
+
+  updateLivesDisplay();
+
+  if (lives <= 0) {
+    gameOver();
+  }
 }
 
 //* ============================================================

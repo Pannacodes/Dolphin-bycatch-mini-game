@@ -157,6 +157,28 @@ button:hover {
 }
 
 /* =========================================================
+   LIVES (hearts) 
+   ========================================================= */
+#game-header {
+  width: 800px;
+  display: flex;
+  align-items: center;
+}
+
+#lives {
+  margin-left: auto; /* pushes hearts to the right */
+  display: flex;
+  gap: 8px;
+}
+
+.heart {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+
+/* =========================================================
    GAME OVER SCREEN 
    ========================================================= */
 

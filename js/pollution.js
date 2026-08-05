@@ -12,6 +12,9 @@ class Pollution {
     this.height = 40
     this.width = 30
     this.speed = 3
+    this.angle = Math.random() * 30 - 15;
+    this.bobTime = Math.random() * Math.PI * 2;
+
 
     this.node.style.position = "absolute"
     this.node.style.left = `${this.x}px`
@@ -23,5 +26,9 @@ class Pollution {
   automaticMovementLeft() {
     this.x -= this.speed
     this.node.style.left = `${this.x}px`
+    this.bobTime += 0.05; // increases the bobbing timer
+    let bobOffset = Math.sin(this.bobTime) * 5; // calculates vertical movement using sine wave
+    this.node.style.transform = 
+    `rotate(${this.angle}deg) translateY(${bobOffset}px)`;
   }
 }

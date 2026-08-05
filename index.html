@@ -44,7 +44,12 @@
     <!-- ============ GAME SCREEN ============ -->
     <div id="game-screen" class="container">
       <!-- Scoreboard sits above the game box and updates live during play -->
-      <div id="scoreboard">Fish caught: <span id="score-value">0</span></div>
+
+      <div id="game-header">
+        <div id="scoreboard">Fish caught: <span id="score-value">0</span></div>
+
+        <div id="lives"></div>
+      </div>
 
       <!-- This is the "stage" where the dolphin, fish and pollutions all live -->
       <!-- Every entity (Dolphin, Fish, Pollution) appends its DOM node in here -->
@@ -54,17 +59,9 @@
     <!-- ============ GAME OVER SCREEN ============ -->
     <div id="game-over-screen" class="container">
       <div class="game-over-title">
-        <img
-          src="./images/crab.gif"
-          class="crab crab-left"
-          alt="little red crab"
-        />
+        <img src="./images/crab.gif" class="crab" alt="little red crab" />
         <h2>GAME OVER</h2>
-        <img
-          src="./images/crab.gif"
-          class="crab crab-right"
-          alt="little red crab"
-        />
+        <img src="./images/crab.gif" class="crab" alt="little red crab" />
       </div>
 
       <p>Final score: <span id="final-score-value">0</span> fish</p>
