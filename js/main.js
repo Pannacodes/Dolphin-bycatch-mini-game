@@ -47,12 +47,14 @@ const finalScoreValueNode = document.querySelector("#final-score-value");
 //* ---------- SOUND ----------
 const splashSoundNode = document.querySelector("#splash-sound");
 const dolphinSoundNode = document.querySelector("#dolphin-sound");
+const happyDolphinNode = document.querySelector("#dolphin-happy");
 const gameMusicNode = document.querySelector("#game-music");
 const soundToggleNode = document.querySelector("#sound-toggle");
 
 gameMusicNode.volume = 0.6;
 splashSoundNode.volume = 0.2;
 dolphinSoundNode.volume = 0.4;
+happyDolphinNode.volume = 0.2;
 
 //* ============================================================
 //* GLOBAL GAME VARIABLES
@@ -107,9 +109,6 @@ function startGame() {
 }
 
 function gameOver() {
-  splashSoundNode.currentTime = 0;
-  splashSoundNode.play();
-
   gameMusicNode.pause();
   gameMusicNode.currentTime = 0;
   // 1. switches screens
@@ -243,6 +242,10 @@ function checkCollisionPlayerFish() {
   // since splicing an array while forEach-ing it can skip elements
   fishArr.forEach((fishObj, index) => {
     if (checkCollision(playerObj, fishObj)) {
+      if (fishObj.isFast) {
+        happyDolphinNode.currentTime = 0;
+        happyDolphinNode.play();
+      }
       // 1. remove the caught fish from the DOM
       fishObj.node.remove();
       // 2. remove it from the tracking array
@@ -257,6 +260,10 @@ function checkCollisionPlayerFish() {
 function checkCollisionPlayerPollution() {
   pollutionArr.forEach((pollutionObj, index) => {
     if (checkCollision(playerObj, pollutionObj)) {
+      // play splash sound
+      splashSoundNode.currentTime = 0;
+      splashSoundNode.play();
+
       // remove pollution from the DOM
       pollutionObj.node.remove();
 
@@ -322,7 +329,9 @@ function toggleSound() {
 
   splashSoundNode.muted = isMuted;
   dolphinSoundNode.muted = isMuted;
+  happyDolphinNode.muted = isMuted;
   gameMusicNode.muted = isMuted;
+  happyDolphinNode.muted = isMuted;
 
   if (isMuted) {
     soundToggleNode.src = "./images/sound-off.png";
@@ -346,7 +355,7 @@ function gameLoop() {
   checkCollisionPlayerPollution();
   checkFishDespawn();
   checkPollutionDespawn();
-  checkMantaDespawn(); 
+  checkMantaDespawn();
 }
 
 //* ============================================================

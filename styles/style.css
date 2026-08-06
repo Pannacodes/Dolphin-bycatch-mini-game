@@ -70,7 +70,7 @@ h1 {
   height: 70px;
 
   cursor: pointer;
-  z-index: 999;
+  z-index: 10;
 
   transition: transform 0.15s ease;
 }
