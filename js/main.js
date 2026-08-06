@@ -44,10 +44,11 @@ const livesNode = document.querySelector("#lives");
 const scoreValueNode = document.querySelector("#score-value");
 const finalScoreValueNode = document.querySelector("#final-score-value");
 
-//* ---------- MUSIC ----------
+//* ---------- SOUND ----------
 const splashSoundNode = document.querySelector("#splash-sound");
 const dolphinSoundNode = document.querySelector("#dolphin-sound");
 const gameMusicNode = document.querySelector("#game-music");
+const soundToggleNode = document.querySelector("#sound-toggle");
 
 gameMusicNode.volume = 0.6;
 splashSoundNode.volume = 0.2;
@@ -71,6 +72,7 @@ let mantaArr = [];
 let score = 0; // how many fish the player has caught
 let lives = 2; // current dolphin lives
 const maxLives = 2; // starting lives
+let isMuted = false;
 
 let bgOffsetX = 0; // how far (in px) the background has scrolled so far
 const bgScrollSpeed = 1; // how many px the background moves left per frame - tweak this to speed up/slow down the current
@@ -135,11 +137,13 @@ function restartGame() {
   //    (if we don't do this, old fish/pollution images stay stuck on screen)
   fishArr.forEach((fishObj) => fishObj.node.remove());
   pollutionArr.forEach((pollutionObj) => pollutionObj.node.remove());
+  mantaArr.forEach((mantaObj) => mantaObj.node.remove());
 
   // 2. clears every entity from my JS tracking structures
   playerObj = null;
   fishArr = [];
   pollutionArr = [];
+  mantaArr = [];
 
   // 3. resets score
   score = 0;
@@ -198,6 +202,25 @@ function checkPollutionDespawn() {
     pollutionArr[0].node.remove();
     pollutionArr.splice(0, 1);
   }
+}
+
+function checkMantaDespawn() {
+  mantaArr.forEach((mantaObj, index) => {
+    // Going left
+    if (mantaObj.direction === "left" && mantaObj.x <= -mantaObj.width) {
+      mantaObj.node.remove();
+      mantaArr.splice(index, 1);
+    }
+
+    // Going right
+    else if (
+      mantaObj.direction === "right" &&
+      mantaObj.x >= window.innerWidth
+    ) {
+      mantaObj.node.remove();
+      mantaArr.splice(index, 1);
+    }
+  });
 }
 
 //* ============================================================
@@ -291,6 +314,26 @@ function scrollBackground() {
 }
 
 //* ============================================================
+//* SOUND TOGGLE
+//* ============================================================
+
+function toggleSound() {
+  isMuted = !isMuted;
+
+  splashSoundNode.muted = isMuted;
+  dolphinSoundNode.muted = isMuted;
+  gameMusicNode.muted = isMuted;
+
+  if (isMuted) {
+    soundToggleNode.src = "./images/sound-off.png";
+    soundToggleNode.alt = "Sound off";
+  } else {
+    soundToggleNode.src = "./images/sound-on.png";
+    soundToggleNode.alt = "Sound on";
+  }
+}
+
+//* ============================================================
 //* MAIN GAME LOOP
 //* This function runs ~60 times per second while the game is active.
 //* ============================================================
@@ -303,6 +346,7 @@ function gameLoop() {
   checkCollisionPlayerPollution();
   checkFishDespawn();
   checkPollutionDespawn();
+  checkMantaDespawn(); 
 }
 
 //* ============================================================
@@ -310,6 +354,7 @@ function gameLoop() {
 //* ============================================================
 startBtnNode.addEventListener("click", startGame);
 restartBtnNode.addEventListener("click", restartGame);
+soundToggleNode.addEventListener("click", toggleSound);
 
 window.addEventListener("keydown", (event) => {
   if (!playerObj) {

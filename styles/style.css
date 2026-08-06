@@ -58,6 +58,28 @@ h1 {
 }
 
 /* =========================================================
+   SOUND TOGGLE
+   ========================================================= */
+
+#sound-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  width: 70px;
+  height: 70px;
+
+  cursor: pointer;
+  z-index: 999;
+
+  transition: transform 0.15s ease;
+}
+
+#sound-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================================
    BUTTONS 
    ========================================================= */
 button {
@@ -137,26 +159,23 @@ button:hover {
   min-height: 100vh;
 }
 
-
 /* =========================================================
    MANTA ANIMATION
    ========================================================= */
 
 #manta-layer {
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index: 2;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
-
 
 .manta-container {
-  position:absolute;
+  position: absolute;
 }
 
-
 .manta-container img {
-  width:250px;
+  width: 250px;
 }
 
 /* =========================================================
@@ -165,6 +184,7 @@ button:hover {
 #scoreboard {
   font-size: clamp(12px, 1.8vw, 18px);
   margin-bottom: 16px;
+  justify-self: center;
 }
 
 #score-value,
@@ -182,13 +202,13 @@ button:hover {
   background-color: #061826; /* fallback while the image loads */
 
   width: min(90vw, 900px);
-  aspect-ratio: 2 / 1; 
+  aspect-ratio: 2 / 1;
 
   position: relative;
   overflow: hidden;
   border-radius: 24px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  z-index: 2;
 }
 
 #game-box * {
@@ -199,23 +219,49 @@ button:hover {
    LIVES (hearts) 
    ========================================================= */
 #game-header {
-  width: 800px;
+  width: min(90vw, 900px);
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  margin-bottom: 16px;
+  z-index: 3;
+}
+
+#game-rules {
+  display: flex;
+  gap: 20px;
+  justify-self: start;
+}
+
+.rule {
   display: flex;
   align-items: center;
+  gap: 4px;
+
+  font-size: 12px;
+}
+
+.rule img {
+  width: 28px;
+}
+
+.minus {
+  line-height: 2;
+  transform: translateY(-1px);
 }
 
 #lives {
-  margin-left: auto; /* pushes hearts to the right */
   display: flex;
+  justify-self: end;
   gap: 8px;
 }
 
 .heart {
   width: 32px;
   height: 32px;
-  image-rendering: pixelated;
 }
-
 
 /* =========================================================
    GAME OVER SCREEN 

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
+    <img id="sound-toggle" src="./images/sound-on.png" alt="Sound on" />
     <!-- ============ START SCREEN ============ -->
     <div id="start-screen" class="container">
       <img
@@ -47,9 +48,24 @@
 
     <!-- ============ GAME SCREEN ============ -->
     <div id="game-screen" class="container">
-      <!-- Scoreboard sits above the game box and updates live during play -->
-
       <div id="game-header">
+        <div id="game-rules">
+          <div class="rule">
+            <img src="./images/fish1.gif" alt="Fish" />
+            <span>:+1</span>
+          </div>
+
+          <div class="rule">
+            <img src="./images/fish2.gif" alt="Fast fish" />
+            <span>:+2</span>
+          </div>
+
+          <div class="rule">
+            <img src="./images/bottle.png" alt="Bottle" />
+            <span> <spanc lass="minus">:-</span><img src="./images/heart.png" alt="heart" /></span>
+          </div>
+        </div>
+
         <div id="scoreboard">Fish caught: <span id="score-value">0</span></div>
 
         <div id="lives"></div>
@@ -79,7 +95,7 @@
       <div class="video-container">
         <iframe
           id="pollution-video"
-          src="https://www.youtube.com/embed/HQTUWK7CM-Y"
+          src="https://www.youtube.com/embed/iDKRA0fAz-k"
           title="Marine Pollution"
           allowfullscreen
         >
@@ -88,8 +104,8 @@
 
       <button id="restart-btn">RESTART</button>
     </div>
-    
-<!--=======
+
+    <!--=======
     AUDIO
   =========-->
 
