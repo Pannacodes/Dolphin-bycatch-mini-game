@@ -1,3 +1,9 @@
+//* ============================================================
+//* POLLUTION (obstacle)
+//* Floats right-to-left with a slight rotation + sine-wave bob
+//* to feel more "adrift" than the fish. Costs a life on contact.
+//* ============================================================
+
 class Pollution {
 
   constructor(randomPosY) {

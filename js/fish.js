@@ -1,3 +1,9 @@
+//* ============================================================
+//* FISH (collectible)
+//* Two variants spawn: a slow +1 fish and, once score >= 5,
+//* a chance of a faster +2 fish. Moves right-to-left automatically.
+//* ============================================================
+
 class Fish {
   constructor(randomPosY, isFast) {
     this.node = document.createElement("img");

@@ -65,6 +65,7 @@ happyDolphinNode.volume = 0.2;
 let gameIntervalId = null; // the main game loop interval
 let fishSpawnIntervalId = null; // spawns a new fish every X ms
 let pollutionSpawnIntervalId = null; // spawns a new pollution every X ms
+let mantaSpawnIntervalId = null;
 
 let playerObj = null; // the Dolphin instance - null until game starts
 
@@ -72,8 +73,9 @@ let fishArr = []; // all Fish currently on screen
 let pollutionArr = []; // all pollution currently on screen
 let mantaArr = [];
 let score = 0; // how many fish the player has caught
-let lives = 2; // current dolphin lives
 const maxLives = 2; // starting lives
+let lives = maxLives; // current dolphin lives
+
 let isMuted = false;
 
 let bgOffsetX = 0; // how far (in px) the background has scrolled so far
@@ -185,22 +187,21 @@ function addNewManta() {
 //* DESPAWNING ENTITIES (cleanup once they exit the screen)
 //* ============================================================
 function checkFishDespawn() {
-  if (fishArr.length === 0) return;
-  if (fishArr[0].x <= 0 - fishArr[0].width) {
-    fishArr[0].node.remove();
-    fishArr.splice(0, 1);
-  }
+  fishArr.forEach((fish, index) => {
+    if (fish.x < -fish.width) {
+      fish.node.remove();
+      fishArr.splice(index, 1);
+    }
+  });
 }
 
 function checkPollutionDespawn() {
-  if (pollutionArr.length === 0) {
-    return;
-  }
-
-  if (pollutionArr[0].x <= 0 - pollutionArr[0].width) {
-    pollutionArr[0].node.remove();
-    pollutionArr.splice(0, 1);
-  }
+  pollutionArr.forEach((pollutionObj, index) => {
+    if (pollutionObj.x < -pollutionObj.width) {
+      pollutionObj.node.remove();
+      pollutionArr.splice(index, 1);
+    }
+  });
 }
 
 function checkMantaDespawn() {
@@ -331,7 +332,6 @@ function toggleSound() {
   dolphinSoundNode.muted = isMuted;
   happyDolphinNode.muted = isMuted;
   gameMusicNode.muted = isMuted;
-  happyDolphinNode.muted = isMuted;
 
   if (isMuted) {
     soundToggleNode.src = "./images/sound-off.png";

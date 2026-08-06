@@ -2,8 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- suggested by Claude -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dolphin Dash</title>
 
@@ -62,7 +60,9 @@
 
           <div class="rule">
             <img src="./images/bottle.png" alt="Bottle" />
-            <span> <spanc lass="minus">:-</span><img src="./images/heart.png" alt="heart" /></span>
+            <span class="minus">:-</span
+              ><img src="./images/heart.png" alt="heart"
+            />
           </div>
         </div>
 
@@ -116,11 +116,6 @@
     <audio id="dolphin-happy" src="./sounds/happydolphin.mp3"></audio>
 
     <audio id="game-music" src="./sounds/DireDireDocks.mp3" loop></audio>
-    <!--
-    Script load order matters because:
-    1. main.js first - it declares the global variables/functions the others use
-    2. entity classes after - they rely on things declared in main.js (like gameBoxNode)
-  -->
 
     <script src="./js/main.js"></script>
     <script src="./js/player.js"></script>

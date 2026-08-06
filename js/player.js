@@ -1,3 +1,9 @@
+//* ============================================================
+//* DOLPHIN (player-controlled)
+//* Created once per game in startGame(). Moves only vertically;
+//* horizontal position is fixed - the background scrolls instead.
+//* ============================================================
+
 class Dolphin {
   constructor() {
     this.node = document.createElement("img");
@@ -11,7 +17,7 @@ class Dolphin {
     this.height = 50;
     this.width = 120;
 
-    this.border = this.node.style.position = "absolute";
+    this.node.style.position = "absolute";
     this.node.style.left = `${this.x}px`;
     this.node.style.top = `${this.y}px`;
     this.node.style.height = `${this.height}px`;

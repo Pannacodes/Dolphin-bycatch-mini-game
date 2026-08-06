@@ -3,7 +3,6 @@
    ========================================================= */
 :root {
   --lavender: #a99cd6;
-  --lavender-light: #cfc4ec;
   --button-purple: #8176b6;
   --button-purple-hover: #7568ab;
   --white: #ffffff;
@@ -123,6 +122,7 @@ button:hover {
 #game-screen,
 #game-over-screen {
   display: none; /* toggled by JS */
+  position: relative;
 }
 
 /* =========================================================
@@ -153,12 +153,6 @@ button:hover {
   bottom: 18%;
 }
 
-.game-page {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-}
-
 /* =========================================================
    MANTA ANIMATION
    ========================================================= */
@@ -170,13 +164,6 @@ button:hover {
   z-index: 1;
 }
 
-.manta-container {
-  position: absolute;
-}
-
-.manta-container img {
-  width: 250px;
-}
 
 /* =========================================================
    GAME BOX - the actual play area

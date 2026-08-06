@@ -1,3 +1,9 @@
+//* ============================================================
+//* MANTA RAY (background decoration, non-interactive)
+//* Spawns every 10s from a random edge and drifts across the
+//* screen behind the game box. Purely visual - no collisions.
+//* ============================================================
+
 class Manta {
   constructor() {
     this.node = document.createElement("img");
